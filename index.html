@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 添加移动端viewport设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>手势控制3D圣诞树 - 移动版</title>
+    <style>
+        /* 原有样式基础上添加以下移动端优化 */
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem !important;
+                padding: 0 15px;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem !important;
+                padding: 0 15px;
+            }
+            
+            .controls-panel {
+                width: 90% !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                bottom: 10px !important;
+                padding: 15px !important;
+                font-size: 0.9rem;
+            }
+            
+            #webcam-container {
+                width: 120px !important;
+                height: 90px !important;
+                bottom: 10px !important;
+                right: 10px !important;
+            }
+            
+            .status-indicator {
+                top: 10px !important;
+                right: 10px !important;
+                padding: 8px 15px !important;
+                font-size: 0.9rem;
+            }
+            
+            .upload-section {
+                top: 70px !important;
+                left: 10px !important;
+                padding: 10px !important;
+            }
+            
+            .upload-btn {
+                padding: 8px 15px !important;
+                font-size: 0.9rem;
+            }
+            
+            .effect-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+                bottom: 130px !important;
+                width: 90%;
+            }
+            
+            .effect-btn {
+                padding: 6px 12px !important;
+                font-size: 0.9rem;
+                margin: 3px;
+            }
+            
+            .instructions {
+                width: 90% !important;
+                padding: 20px !important;
+            }
+            
+            .instructions h2 {
+                font-size: 1.5rem;
+            }
+            
+            .start-btn {
+                padding: 10px 25px !important;
+            }
+            
+            /* 手势图标在手机上更小 */
+            .gesture-icon {
+                width: 35px !important;
+                height: 35px !important;
+                font-size: 1rem !important;
+            }
+            
+            /* 隐藏桌面特定元素 */
+            .header {
+                padding: 10px !important;
+            }
+        }
+        
+        /* 横屏优化 */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .controls-panel {
+                width: 300px !important;
+                bottom: 5px !important;
+            }
+            
+            #webcam-container {
+                bottom: 5px !important;
+                right: 5px !important;
+            }
+            
+            .upload-section {
+                top: 10px !important;
+            }
+        }
+        
+        /* 防止移动端点击高亮 */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* 改善触摸体验 */
+        button, .effect-btn, .upload-btn {
+            touch-action: manipulation;
+        }
+        
+        /* 防止文本选择 */
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* 移动端安全区域适配（iOS） */
+        @supports (padding: max(0px)) {
+            .controls-panel, .status-indicator, .upload-section {
+                padding-left: max(15px, env(safe-area-inset-left));
+                padding-right: max(15px, env(safe-area-inset-right));
+            }
+        }
+    </style>
+</head>
+<body class="no-select">
+    <!-- 其余HTML代码保持不变 -->
+</body>
+</html>
