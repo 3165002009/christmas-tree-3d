@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Grand Luxury Tree Final v2</title>
+    <title>Christmas Tree Magic</title>
     <style>
       * {
         -webkit-tap-highlight-color: transparent;
@@ -26,27 +26,6 @@
         top: 0;
         left: 0;
         z-index: 1;
-      }
-
-      /* UI Overlay - Mobile Optimized */
-      #ui-layer {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 10;
-        pointer-events: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 20px;
-        box-sizing: border-box;
-      }
-
-      .ui-hidden {
-        opacity: 0;
-        pointer-events: none !important;
       }
 
       /* Loading */
@@ -90,10 +69,10 @@
         100% { transform: rotate(360deg); }
       }
 
-      /* Typography - Mobile Adjusted */
+      /* Typography */
       h1 {
         color: #fceea7;
-        font-size: clamp(32px, 8vw, 56px);
+        font-size: clamp(32px, 8vw, 48px);
         margin: 0;
         font-weight: 400;
         letter-spacing: 3px;
@@ -104,181 +83,186 @@
         font-family: 'Cinzel', 'Times New Roman', serif;
         opacity: 0.9;
         text-align: center;
-        padding: 0 20px;
-      }
-
-      /* Upload Button - Mobile Friendly */
-      .upload-wrapper {
+        padding: 10px 20px 0;
         position: absolute;
-        top: 20px;
-        right: 20px;
-        pointer-events: auto;
-        text-align: center;
+        top: 10px;
+        left: 0;
+        right: 0;
         z-index: 11;
       }
-      
-      .upload-btn {
-        background: rgba(20, 20, 20, 0.8);
-        border: 1px solid rgba(212, 175, 55, 0.6);
-        color: #d4af37;
-        padding: 12px 20px;
-        cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 11px;
-        transition: all 0.4s;
-        display: inline-block;
-        backdrop-filter: blur(5px);
-        border-radius: 20px;
-        min-width: 120px;
-        -webkit-appearance: none;
-        touch-action: manipulation;
-      }
-      
-      .upload-btn:active {
-        background: #d4af37;
-        color: #000;
-        transform: scale(0.95);
-      }
-      
-      .hint-text {
-        color: rgba(212, 175, 55, 0.7);
-        font-size: 10px;
-        margin-top: 6px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
 
-      #file-input {
-        display: none;
-      }
-
-      /* Mobile Gesture Controls Panel */
-      #mobile-controls {
+      /* Minimal Control Bar */
+      #control-bar {
         position: absolute;
-        bottom: 20px;
+        top: 80px;
         left: 0;
-        width: 100%;
+        right: 0;
         display: flex;
         justify-content: center;
         gap: 15px;
         z-index: 11;
-        pointer-events: none;
+        padding: 0 10px;
       }
       
       .control-btn {
-        pointer-events: auto;
-        background: rgba(20, 20, 20, 0.8);
+        background: rgba(20, 20, 20, 0.7);
         border: 1px solid rgba(212, 175, 55, 0.6);
         color: #d4af37;
-        padding: 12px 16px;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-size: 12px;
         cursor: pointer;
         touch-action: manipulation;
         user-select: none;
         backdrop-filter: blur(5px);
         transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 60px;
+        justify-content: center;
+        white-space: nowrap;
       }
       
       .control-btn:active {
         background: #d4af37;
         color: #000;
-        transform: scale(0.9);
+        transform: scale(0.95);
       }
       
-      .control-label {
-        position: absolute;
-        bottom: -25px;
-        color: rgba(212, 175, 55, 0.8);
-        font-size: 10px;
-        letter-spacing: 1px;
-        white-space: nowrap;
-      }
-
-      /* Mobile Help Panel */
-      #mobile-help {
-        position: absolute;
-        top: 80px;
-        left: 20px;
-        background: rgba(0, 0, 0, 0.9);
-        border: 1px solid rgba(212, 175, 55, 0.4);
-        border-radius: 12px;
-        padding: 15px;
-        max-width: 280px;
-        pointer-events: auto;
-        font-size: 12px;
-        line-height: 1.5;
-        backdrop-filter: blur(10px);
-        z-index: 11;
-      }
-      
-      #mobile-help h3 {
-        color: #d4af37;
-        margin: 0 0 12px 0;
-        border-bottom: 1px solid #d4af37;
-        padding-bottom: 8px;
+      .control-btn i {
         font-size: 14px;
       }
-      
-      #mobile-help p {
-        margin: 6px 0;
-        color: #ccc;
-      }
-      
-      #mobile-help code {
-        background: rgba(212, 175, 55, 0.15);
-        padding: 2px 6px;
-        border-radius: 3px;
-        color: #d4af37;
-        font-family: monospace;
-      }
-      
-      #mobile-help hr {
-        border: none;
-        border-top: 1px solid #d4af37;
-        margin: 10px 0;
-      }
-      
-      .close-help {
+
+      /* Gesture Control Toggle */
+      #gesture-toggle {
         position: absolute;
-        top: 8px;
-        right: 8px;
-        color: #d4af37;
-        background: none;
-        border: none;
-        font-size: 18px;
-        cursor: pointer;
-        padding: 0;
-        width: 24px;
-        height: 24px;
+        top: 20px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+        background: rgba(20, 20, 20, 0.7);
+        border: 1px solid rgba(212, 175, 55, 0.6);
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
+        color: #d4af37;
+        font-size: 20px;
+        cursor: pointer;
+        z-index: 11;
+        backdrop-filter: blur(5px);
+        touch-action: manipulation;
+      }
+      
+      #gesture-toggle.active {
+        background: #d4af37;
+        color: #000;
       }
 
-      /* Webcam wrapper for mobile */
-      #webcam-wrapper {
+      /* Hide UI Button */
+      #hide-ui-btn {
         position: absolute;
-        bottom: 40px;
-        right: 20px;
-        width: 120px;
-        height: 90px;
-        border: 2px solid rgba(212, 175, 55, 0.6);
-        border-radius: 4px;
-        overflow: hidden;
-        pointer-events: none;
-        background-color: rgba(0, 0, 0, 0.7);
+        top: 20px;
+        left: 20px;
+        width: 44px;
+        height: 44px;
+        background: rgba(20, 20, 20, 0.7);
+        border: 1px solid rgba(212, 175, 55, 0.6);
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        color: #d4af37;
+        font-size: 20px;
+        cursor: pointer;
+        z-index: 11;
+        backdrop-filter: blur(5px);
+        touch-action: manipulation;
+      }
+
+      /* Camera Preview (hidden by default) */
+      #camera-indicator {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        background: rgba(20, 20, 20, 0.7);
+        border: 1px solid rgba(212, 175, 55, 0.6);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #d4af37;
+        font-size: 18px;
+        z-index: 11;
+        backdrop-filter: blur(5px);
+        opacity: 0.5;
+      }
+      
+      #camera-indicator.active {
+        background: #d4af37;
+        color: #000;
+        opacity: 1;
+      }
+
+      /* File Upload Button */
+      #upload-btn {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background: rgba(20, 20, 20, 0.7);
+        border: 1px solid rgba(212, 175, 55, 0.6);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #d4af37;
+        font-size: 20px;
+        cursor: pointer;
+        z-index: 11;
+        backdrop-filter: blur(5px);
+        touch-action: manipulation;
+      }
+      
+      #file-input {
+        display: none;
+      }
+
+      /* Gesture Instruction */
+      #gesture-hint {
+        position: absolute;
+        bottom: 80px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: rgba(212, 175, 55, 0.7);
+        font-size: 11px;
+        letter-spacing: 1px;
+        z-index: 11;
+        padding: 0 20px;
+        opacity: 0.7;
+      }
+
+      /* Hidden state for UI */
+      .ui-hidden {
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      /* Camera Feed (for gesture recognition) */
+      #webcam-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 160px;
+        height: 120px;
+        overflow: hidden;
         z-index: 50;
+        display: none;
       }
 
       #webcam-preview {
@@ -287,170 +271,80 @@
         display: block;
       }
 
-      /* Gesture toggle button */
-      #gesture-toggle {
+      /* Mode Indicator */
+      #mode-indicator {
         position: absolute;
-        bottom: 20px;
-        left: 20px;
-        width: 44px;
-        height: 44px;
-        background: rgba(20, 20, 20, 0.8);
-        border: 1px solid rgba(212, 175, 55, 0.6);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #d4af37;
-        font-size: 20px;
-        cursor: pointer;
-        pointer-events: auto;
-        z-index: 11;
-        backdrop-filter: blur(5px);
-        touch-action: manipulation;
-      }
-      
-      #gesture-toggle:active {
-        transform: scale(0.9);
-      }
-      
-      #gesture-toggle.active {
-        background: #d4af37;
-        color: #000;
-      }
-
-      /* Performance Warning */
-      .performance-warning {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.9);
-        border: 1px solid #d4af37;
-        padding: 20px;
-        border-radius: 10px;
-        color: #d4af37;
+        top: 140px;
+        left: 0;
+        right: 0;
         text-align: center;
-        max-width: 300px;
-        z-index: 1000;
-        display: none;
-      }
-      
-      .performance-warning button {
-        background: #d4af37;
-        color: #000;
-        border: none;
-        padding: 10px 20px;
-        margin-top: 15px;
-        border-radius: 20px;
-        cursor: pointer;
-        font-weight: bold;
+        color: #d4af37;
+        font-size: 14px;
+        letter-spacing: 2px;
+        z-index: 11;
+        opacity: 0.8;
+        text-transform: uppercase;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 5px 0;
+        backdrop-filter: blur(5px);
       }
 
       /* Media Queries */
       @media (max-width: 768px) {
         h1 {
-          font-size: 36px;
-          letter-spacing: 2px;
-          margin-top: 20px;
+          font-size: 28px;
+          top: 5px;
         }
         
-        .upload-wrapper {
-          top: 15px;
-          right: 15px;
-        }
-        
-        .upload-btn {
-          padding: 10px 16px;
-          font-size: 10px;
-          min-width: 100px;
-        }
-        
-        #mobile-help {
-          top: 70px;
-          left: 15px;
-          right: 15px;
-          max-width: none;
-          font-size: 11px;
-        }
-        
-        #webcam-wrapper {
-          width: 100px;
-          height: 75px;
-          bottom: 140px;
-          right: 15px;
+        #control-bar {
+          top: 60px;
+          gap: 10px;
         }
         
         .control-btn {
-          width: 44px;
-          height: 44px;
+          padding: 8px 12px;
+          font-size: 11px;
+          min-width: 50px;
+        }
+        
+        #gesture-toggle, #hide-ui-btn, #upload-btn, #camera-indicator {
+          width: 40px;
+          height: 40px;
           font-size: 18px;
         }
         
-        .control-label {
-          font-size: 9px;
-          bottom: -22px;
+        #mode-indicator {
+          top: 110px;
+          font-size: 12px;
         }
         
-        #gesture-toggle {
-          bottom: 140px;
-          left: 15px;
-          width: 40px;
-          height: 40px;
+        #gesture-hint {
+          bottom: 70px;
+          font-size: 10px;
         }
       }
       
-      @media (max-width: 480px) {
+      @media (orientation: landscape) and (max-height: 500px) {
         h1 {
-          font-size: 28px;
-          letter-spacing: 1px;
+          font-size: 24px;
+          top: 5px;
+        }
+        
+        #control-bar {
+          top: 50px;
         }
         
         .control-btn {
-          width: 40px;
-          height: 40px;
-          font-size: 16px;
-          padding: 10px;
+          padding: 6px 10px;
+          font-size: 10px;
         }
         
-        #mobile-controls {
-          gap: 10px;
-          bottom: 15px;
+        #mode-indicator {
+          top: 90px;
         }
         
-        #webcam-wrapper {
-          width: 80px;
-          height: 60px;
-          bottom: 130px;
-        }
-      }
-
-      @media (orientation: landscape) and (max-height: 500px) {
-        h1 {
+        #gesture-hint {
           display: none;
-        }
-        
-        #mobile-help {
-          top: 60px;
-          padding: 12px;
-        }
-        
-        .upload-wrapper {
-          top: 10px;
-          right: 10px;
-        }
-        
-        #mobile-controls {
-          bottom: 10px;
-        }
-        
-        #webcam-wrapper {
-          bottom: 10px;
-          right: 10px;
-        }
-        
-        #gesture-toggle {
-          bottom: 10px;
-          left: 10px;
         }
       }
     </style>
@@ -472,78 +366,52 @@
   <body>
     <div id="loader">
       <div class="spinner"></div>
-      <div class="loader-text">加载节日魔法</div>
+      <div class="loader-text">Loading Christmas Magic</div>
     </div>
 
     <div id="canvas-container"></div>
 
-    <div id="ui-layer">
-      <!-- Mobile Help Panel -->
-      <div id="mobile-help" style="display: none;">
-        <button class="close-help">×</button>
-        <h3>🎄 操作说明</h3>
-        <p><span style="color: #d4af37;">👊 握拳：</span> 聚合圣诞树</p>
-        <p><span style="color: #d4af37;">🖐️ 张开：</span> 粒子散开</p>
-        <p><span style="color: #d4af37;">🤏 捏夹：</span> 照片聚焦</p>
-        <hr />
-        <p>或使用下方控制按钮：</p>
-        <p style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
-          <span style="font-size: 20px;">🌲</span> 树形
-          <span style="font-size: 20px; margin-left: 15px;">✨</span> 散开
-          <span style="font-size: 20px; margin-left: 15px;">📸</span> 聚焦
-        </p>
-        <p style="font-size: 11px; color: #999; margin-top: 12px">
-          💡 可上传照片添加到树中，照片仅保存在浏览器中
-        </p>
-      </div>
+    <!-- Title -->
+    <h1>🎄 Merry Christmas NLL</h1>
 
-      <h1>Merry Christmas</h1>
+    <!-- Mode Indicator -->
+    <div id="mode-indicator">Tree Mode</div>
 
-      <!-- Upload Button -->
-      <div class="upload-wrapper">
-        <label class="upload-btn">
-          📸 上传照片
-          <input type="file" id="file-input" multiple accept="image/*" />
-        </label>
-        <div class="hint-text">仅保存于浏览器</div>
-      </div>
-
-      <!-- Gesture Toggle Button -->
-      <div id="gesture-toggle" class="active" title="开启/关闭手势识别">👋</div>
-
-      <!-- Webcam Feed -->
-      <div id="webcam-wrapper">
-        <video id="webcam" autoplay muted playsinline style="display: none"></video>
-        <canvas id="webcam-preview"></canvas>
-      </div>
-
-      <!-- Mobile Controls -->
-      <div id="mobile-controls">
-        <div class="control-group">
-          <div class="control-btn" id="btn-tree" title="聚合树形">🌲</div>
-          <div class="control-label">树形</div>
-        </div>
-        <div class="control-group">
-          <div class="control-btn" id="btn-scatter" title="粒子散开">✨</div>
-          <div class="control-label">散开</div>
-        </div>
-        <div class="control-group">
-          <div class="control-btn" id="btn-focus" title="照片聚焦">📸</div>
-          <div class="control-label">聚焦</div>
-        </div>
-        <div class="control-group">
-          <div class="control-btn" id="btn-rotate" title="旋转视图">🔄</div>
-          <div class="control-label">旋转</div>
-        </div>
-      </div>
+    <!-- Control Bar -->
+    <div id="control-bar">
+      <button class="control-btn" id="btn-tree">
+        <span>🌲</span> Tree
+      </button>
+      <button class="control-btn" id="btn-scatter">
+        <span>✨</span> Scatter
+      </button>
+      <button class="control-btn" id="btn-focus">
+        <span>📸</span> Focus
+      </button>
     </div>
 
-    <!-- Performance Warning -->
-    <div class="performance-warning" id="perf-warning">
-      <h3>⚠️ 性能提示</h3>
-      <p>检测到您的设备性能较低，是否关闭手势识别以获得更流畅的体验？</p>
-      <button id="disable-gesture-btn">关闭手势识别</button>
-      <button id="continue-btn" style="background: #666; margin-left: 10px;">保持开启</button>
+    <!-- Hide UI Button -->
+    <div id="hide-ui-btn" title="Hide UI">👁️</div>
+
+    <!-- Gesture Toggle -->
+    <div id="gesture-toggle" class="active" title="Gesture Control">👋</div>
+
+    <!-- Camera Activity Indicator -->
+    <div id="camera-indicator" title="Gesture Detection">📷</div>
+
+    <!-- Upload Button -->
+    <div id="upload-btn" title="Upload Photo">
+      <label for="file-input" style="cursor: pointer;">📸</label>
+      <input type="file" id="file-input" multiple accept="image/*" />
+    </div>
+
+    <!-- Gesture Hint -->
+    <div id="gesture-hint">👊 Fist to Tree • ✋ Open to Scatter • 🤏 Pinch to Focus</div>
+
+    <!-- Camera Feed (hidden) -->
+    <div id="webcam-wrapper">
+      <video id="webcam" autoplay muted playsinline style="display: none"></video>
+      <canvas id="webcam-preview"></canvas>
     </div>
 
     <script type="module">
@@ -554,9 +422,8 @@
       import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
       import { FilesetResolver, HandLandmarker } from '@mediapipe/tasks-vision'
 
-      // --- MOBILE CONFIGURATION ---
+      // Configuration
       const IS_MOBILE = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      const IS_TOUCH = 'ontouchstart' in window;
       
       const CONFIG = {
         colors: {
@@ -566,20 +433,20 @@
           accentRed: 0x990000,
         },
         particles: {
-          // Reduced particle count for mobile
-          count: IS_MOBILE ? 800 : 1500,
-          dustCount: IS_MOBILE ? 1200 : 2500,
-          treeHeight: 20,
-          treeRadius: 6,
+          count: IS_MOBILE ? 800 : 1200,
+          dustCount: IS_MOBILE ? 1000 : 1800,
+          treeHeight: IS_MOBILE ? 16 : 20,
+          treeRadius: IS_MOBILE ? 4 : 6,
         },
         camera: {
-          z: IS_MOBILE ? 35 : 50,
+          z: IS_MOBILE ? 30 : 40,
+          y: IS_MOBILE ? 8 : 5,
         },
         performance: {
-          pixelRatio: IS_MOBILE ? Math.min(window.devicePixelRatio, 1.5) : 2,
-          bloomStrength: IS_MOBILE ? 0.3 : 0.45,
+          pixelRatio: IS_MOBILE ? Math.min(window.devicePixelRatio, 1.2) : 1.5,
+          bloomStrength: 0.3,
         },
-        gestureEnabled: true // 默认启用手势识别
+        gestureEnabled: true
       }
 
       const STATE = {
@@ -589,8 +456,7 @@
         hand: { detected: false, x: 0, y: 0 },
         rotation: { x: 0, y: 0 },
         autoRotate: false,
-        touchStart: { x: 0, y: 0 },
-        isDragging: false,
+        uiVisible: true,
         gestureEnabled: CONFIG.gestureEnabled
       }
 
@@ -601,36 +467,22 @@
       let photoMeshGroup = new THREE.Group()
       let caneTexture
       let handLandmarker, video, webcamCanvas, webcamCtx
-
-      // Mobile gesture tracking
-      let touchPoints = [];
-      let lastTouchTime = 0;
-      let isGestureActive = false;
+      
       let lastVideoTime = -1;
 
-      // 存储上传的照片到本地存储
-      const STORAGE_KEY = 'christmas_tree_photos';
-      let uploadedPhotos = [];
-
       async function init() {
-        // Check performance before loading
-        if (IS_MOBILE && !checkPerformance()) {
-          showPerformanceWarning();
-          return;
-        }
-        
         initThree()
         setupEnvironment()
         setupLights()
         createTextures()
         createParticles()
         createDust()
-        loadSavedPhotos() // 加载之前保存的照片
         createDefaultPhotos()
+        loadSavedPhotos()
         setupPostProcessing()
         setupEvents()
         
-        // 初始化MediaPipe手势识别
+        // Initialize MediaPipe for gesture recognition
         await initMediaPipe();
 
         const loader = document.getElementById('loader')
@@ -638,31 +490,6 @@
         setTimeout(() => loader.remove(), 800)
 
         animate()
-      }
-
-      function checkPerformance() {
-        // Simple performance check
-        const memory = performance.memory;
-        const hasEnoughMemory = !memory || memory.jsHeapSizeLimit > 500000000;
-        const isHighEndDevice = navigator.hardwareConcurrency > 4;
-        
-        return hasEnoughMemory || isHighEndDevice;
-      }
-
-      function showPerformanceWarning() {
-        document.getElementById('perf-warning').style.display = 'block';
-        
-        document.getElementById('disable-gesture-btn').onclick = () => {
-          STATE.gestureEnabled = false;
-          document.getElementById('gesture-toggle').classList.remove('active');
-          document.getElementById('gesture-toggle').title = "手势识别已关闭";
-          document.getElementById('webcam-wrapper').style.display = 'none';
-          document.getElementById('perf-warning').style.display = 'none';
-        };
-        
-        document.getElementById('continue-btn').onclick = () => {
-          document.getElementById('perf-warning').style.display = 'none';
-        };
       }
 
       function initThree() {
@@ -677,7 +504,7 @@
           0.1,
           1000
         )
-        camera.position.set(0, 5, CONFIG.camera.z)
+        camera.position.set(0, CONFIG.camera.y, CONFIG.camera.z)
 
         renderer = new THREE.WebGLRenderer({
           antialias: !IS_MOBILE,
@@ -712,23 +539,18 @@
         innerLight.position.set(0, 5, 0)
         mainGroup.add(innerLight)
 
-        const spotGold = new THREE.SpotLight(0xffcc66, 800)
-        spotGold.position.set(20, 30, 20)
+        const spotGold = new THREE.SpotLight(0xffcc66, 600)
+        spotGold.position.set(15, 25, 15)
         spotGold.angle = 0.4
         spotGold.penumbra = 0.5
         scene.add(spotGold)
 
-        const fill = new THREE.DirectionalLight(0xffeebb, 0.6)
-        fill.position.set(0, 0, 30)
+        const fill = new THREE.DirectionalLight(0xffeebb, 0.5)
+        fill.position.set(0, 0, 25)
         scene.add(fill)
       }
 
       function setupPostProcessing() {
-        if (IS_MOBILE && CONFIG.performance.bloomStrength < 0.2) {
-          // Skip bloom on low-end devices
-          return;
-        }
-        
         const renderScene = new RenderPass(scene, camera)
         const bloomPass = new UnrealBloomPass(
           new THREE.Vector2(window.innerWidth, window.innerHeight),
@@ -777,7 +599,7 @@
           this.posScatter = new THREE.Vector3()
           this.baseScale = mesh.scale.x
 
-          const speedMult = type === 'PHOTO' ? 0.2 : 1.5
+          const speedMult = type === 'PHOTO' ? 0.2 : 1.2
 
           this.spinSpeed = new THREE.Vector3(
             (Math.random() - 0.5) * speedMult,
@@ -796,13 +618,13 @@
           const y = t * h - halfH
           let rMax = CONFIG.particles.treeRadius * (1.0 - t)
           if (rMax < 0.3) rMax = 0.3
-          const angle = t * 40 * Math.PI + Math.random() * Math.PI
+          const angle = t * 35 * Math.PI + Math.random() * Math.PI
           const r = rMax * (0.8 + Math.random() * 0.4)
           this.posTree.set(Math.cos(angle) * r, y, Math.sin(angle) * r)
 
           let rScatter = this.isDust
-            ? 10 + Math.random() * 15
-            : 6 + Math.random() * 10
+            ? 8 + Math.random() * 12
+            : 5 + Math.random() * 8
           const theta = Math.random() * Math.PI * 2
           const phi = Math.acos(2 * Math.random() - 1)
           this.posScatter.set(
@@ -818,7 +640,7 @@
           if (mode === 'SCATTER') target = this.posScatter
           else if (mode === 'FOCUS') {
             if (this.mesh === focusTargetMesh) {
-              const desiredWorldPos = new THREE.Vector3(0, 3, 25)
+              const desiredWorldPos = new THREE.Vector3(0, 3, 20)
               const invMatrix = new THREE.Matrix4()
                 .copy(mainGroup.matrixWorld)
                 .invert()
@@ -829,7 +651,7 @@
           }
 
           const lerpSpeed =
-            mode === 'FOCUS' && this.mesh === focusTargetMesh ? 4.0 : 1.8
+            mode === 'FOCUS' && this.mesh === focusTargetMesh ? 3.5 : 1.5
           this.mesh.position.lerp(target, lerpSpeed * dt)
 
           if (mode === 'SCATTER') {
@@ -847,7 +669,7 @@
               0,
               dt
             )
-            this.mesh.rotation.y += 0.3 * dt
+            this.mesh.rotation.y += 0.25 * dt
           }
 
           if (mode === 'FOCUS' && this.mesh === focusTargetMesh) {
@@ -858,35 +680,35 @@
           if (this.isDust) {
             s =
               this.baseScale *
-              (0.8 + 0.4 * Math.sin(clock.elapsedTime * 3 + this.mesh.id))
+              (0.8 + 0.4 * Math.sin(clock.elapsedTime * 2.5 + this.mesh.id))
             if (mode === 'TREE') s = 0
           } else if (mode === 'SCATTER' && this.type === 'PHOTO') {
-            s = this.baseScale * 2.0
+            s = this.baseScale * 1.8
           } else if (mode === 'FOCUS') {
-            if (this.mesh === focusTargetMesh) s = 3.5
-            else s = this.baseScale * 0.6
+            if (this.mesh === focusTargetMesh) s = 3.0
+            else s = this.baseScale * 0.5
           }
 
-          this.mesh.scale.lerp(new THREE.Vector3(s, s, s), 3 * dt)
+          this.mesh.scale.lerp(new THREE.Vector3(s, s, s), 2.5 * dt)
         }
       }
 
       function createParticles() {
-        const sphereGeo = new THREE.SphereGeometry(0.4, 16, 16)
-        const boxGeo = new THREE.BoxGeometry(0.45, 0.45, 0.45)
+        const sphereGeo = new THREE.SphereGeometry(0.35, 12, 12)
+        const boxGeo = new THREE.BoxGeometry(0.4, 0.4, 0.4)
         const curve = new THREE.CatmullRomCurve3([
-          new THREE.Vector3(0, -0.4, 0),
-          new THREE.Vector3(0, 0.2, 0),
-          new THREE.Vector3(0.08, 0.4, 0),
-          new THREE.Vector3(0.25, 0.3, 0),
+          new THREE.Vector3(0, -0.35, 0),
+          new THREE.Vector3(0, 0.18, 0),
+          new THREE.Vector3(0.07, 0.35, 0),
+          new THREE.Vector3(0.22, 0.25, 0),
         ])
-        const candyGeo = new THREE.TubeGeometry(curve, 12, 0.06, 6, false)
+        const candyGeo = new THREE.TubeGeometry(curve, 10, 0.05, 5, false)
 
         const goldMat = new THREE.MeshStandardMaterial({
           color: CONFIG.colors.champagneGold,
           metalness: 0.8,
           roughness: 0.2,
-          envMapIntensity: 1.5,
+          envMapIntensity: 1.2,
           emissive: 0x443300,
           emissiveIntensity: 0.2,
         })
@@ -933,7 +755,7 @@
             type = 'CANE'
           }
 
-          const s = 0.3 + Math.random() * 0.4
+          const s = 0.25 + Math.random() * 0.35
           mesh.scale.set(s, s, s)
           mesh.rotation.set(
             Math.random() * 6,
@@ -945,32 +767,32 @@
           particleSystem.push(new Particle(mesh, type, false))
         }
 
-        const starGeo = new THREE.OctahedronGeometry(1.0, 0)
+        const starGeo = new THREE.OctahedronGeometry(0.9, 0)
         const starMat = new THREE.MeshStandardMaterial({
           color: 0xffdd88,
           emissive: 0xffaa00,
-          emissiveIntensity: 0.8,
+          emissiveIntensity: 0.7,
           metalness: 0.8,
           roughness: 0.1,
         })
         const star = new THREE.Mesh(starGeo, starMat)
-        star.position.set(0, CONFIG.particles.treeHeight / 2 + 1.0, 0)
+        star.position.set(0, CONFIG.particles.treeHeight / 2 + 0.8, 0)
         mainGroup.add(star)
 
         mainGroup.add(photoMeshGroup)
       }
 
       function createDust() {
-        const geo = new THREE.TetrahedronGeometry(0.06, 0)
+        const geo = new THREE.TetrahedronGeometry(0.05, 0)
         const mat = new THREE.MeshBasicMaterial({
           color: 0xffeebb,
           transparent: true,
-          opacity: 0.6,
+          opacity: 0.5,
         })
 
         for (let i = 0; i < CONFIG.particles.dustCount; i++) {
           const mesh = new THREE.Mesh(geo, mat)
-          mesh.scale.setScalar(0.4 + Math.random())
+          mesh.scale.setScalar(0.3 + Math.random() * 0.5)
           mainGroup.add(mesh)
           particleSystem.push(new Particle(mesh, 'DUST', true))
         }
@@ -984,32 +806,32 @@
         ctx.fillStyle = '#050505'
         ctx.fillRect(0, 0, 256, 256)
         ctx.strokeStyle = '#eebb66'
-        ctx.lineWidth = 8
+        ctx.lineWidth = 6
         ctx.strokeRect(10, 10, 236, 236)
-        ctx.font = '400 30px Times New Roman'
+        ctx.font = '400 24px Times New Roman'
         ctx.fillStyle = '#eebb66'
         ctx.textAlign = 'center'
-        ctx.fillText('上传照片', 128, 110)
-        ctx.fillText('添加美好回忆', 128, 150)
+        ctx.fillText('Upload Your', 128, 110)
+        ctx.fillText('Photos', 128, 140)
         ctx.font = '300 16px Times New Roman'
-        ctx.fillText('点击上方相机按钮', 128, 200)
+        ctx.fillText('Tap 📸 button', 128, 190)
 
         const tex = new THREE.CanvasTexture(canvas)
         tex.colorSpace = THREE.SRGBColorSpace
         addPhotoToScene(tex)
       }
 
-      // 加载保存的照片
+      // Load saved photos from localStorage
       function loadSavedPhotos() {
         try {
-          const saved = localStorage.getItem(STORAGE_KEY);
+          const saved = localStorage.getItem('christmas_tree_photos');
           if (saved) {
-            uploadedPhotos = JSON.parse(saved);
-            uploadedPhotos.forEach(photoData => {
+            const photos = JSON.parse(saved);
+            photos.forEach(photoData => {
               const img = new Image();
               img.onload = () => {
                 const canvas = document.createElement('canvas');
-                const maxSize = 512;
+                const maxSize = 400;
                 let width = img.width;
                 let height = img.height;
                 
@@ -1032,48 +854,47 @@
             });
           }
         } catch (e) {
-          console.log('无法加载保存的照片:', e);
+          console.log('Could not load saved photos:', e);
         }
       }
 
-      // 保存照片到本地存储
+      // Save photo to localStorage
       function savePhotoToStorage(dataUrl) {
         try {
-          uploadedPhotos.push(dataUrl);
-          // 限制保存的照片数量，防止存储空间过大
-          if (uploadedPhotos.length > 20) {
-            uploadedPhotos = uploadedPhotos.slice(-20);
+          const saved = localStorage.getItem('christmas_tree_photos') || '[]';
+          const photos = JSON.parse(saved);
+          photos.push(dataUrl);
+          
+          // Limit to 10 photos
+          if (photos.length > 10) {
+            photos.shift();
           }
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(uploadedPhotos));
+          
+          localStorage.setItem('christmas_tree_photos', JSON.stringify(photos));
         } catch (e) {
-          console.log('无法保存照片:', e);
-          // 如果存储空间不足，清理旧照片
-          if (e.name === 'QuotaExceededError') {
-            uploadedPhotos = uploadedPhotos.slice(-10);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(uploadedPhotos));
-          }
+          console.log('Could not save photo:', e);
         }
       }
 
       function addPhotoToScene(texture) {
-        const frameGeo = new THREE.BoxGeometry(1.2, 1.2, 0.04)
+        const frameGeo = new THREE.BoxGeometry(1.0, 1.0, 0.03)
         const frameMat = new THREE.MeshStandardMaterial({
           color: CONFIG.colors.champagneGold,
-          metalness: 0.8,
-          roughness: 0.2,
+          metalness: 0.7,
+          roughness: 0.3,
         })
         const frame = new THREE.Mesh(frameGeo, frameMat)
 
-        const photoGeo = new THREE.PlaneGeometry(1.0, 1.0)
+        const photoGeo = new THREE.PlaneGeometry(0.85, 0.85)
         const photoMat = new THREE.MeshBasicMaterial({ map: texture })
         const photo = new THREE.Mesh(photoGeo, photoMat)
-        photo.position.z = 0.03
+        photo.position.z = 0.02
 
         const group = new THREE.Group()
         group.add(frame)
         group.add(photo)
 
-        const s = 0.7
+        const s = 0.6
         group.scale.set(s, s, s)
 
         photoMeshGroup.add(group)
@@ -1084,8 +905,8 @@
         const files = e.target.files
         if (!files.length) return
         Array.from(files).forEach((f) => {
-          if (f.size > 5 * 1024 * 1024) {
-            alert('图片大小不能超过5MB')
+          if (f.size > 3 * 1024 * 1024) {
+            alert('Image size should be less than 3MB')
             return
           }
           
@@ -1094,9 +915,8 @@
             const dataUrl = ev.target.result;
             const img = new Image()
             img.onload = () => {
-              // Resize image for mobile performance
               const canvas = document.createElement('canvas')
-              const maxSize = 512
+              const maxSize = 400
               let width = img.width
               let height = img.height
               
@@ -1111,7 +931,7 @@
               const ctx = canvas.getContext('2d')
               ctx.drawImage(img, 0, 0, width, height)
               
-              // 保存压缩后的图片到本地存储
+              // Save compressed image
               const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
               savePhotoToStorage(compressedDataUrl);
               
@@ -1125,7 +945,7 @@
         })
       }
 
-      // MediaPipe手势识别
+      // MediaPipe gesture recognition
       async function initMediaPipe() {
         video = document.getElementById('webcam')
         webcamCanvas = document.getElementById('webcam-preview')
@@ -1162,28 +982,21 @@
               if (playPromise !== undefined) {
                 playPromise
                   .then(() => {
-                    console.log('Video playing successfully')
                     requestAnimationFrame(predictWebcam)
                   })
                   .catch((err) => {
                     console.error('Video play failed:', err)
-                    // 如果视频播放失败，显示错误信息
-                    document.getElementById('gesture-toggle').style.display = 'none';
-                    document.getElementById('webcam-wrapper').style.display = 'none';
+                    toggleGesture(false)
                   })
               }
             } catch (error) {
               console.error('Failed to access camera:', error)
-              // 如果摄像头访问失败，隐藏相关UI
-              document.getElementById('gesture-toggle').style.display = 'none';
-              document.getElementById('webcam-wrapper').style.display = 'none';
+              toggleGesture(false)
             }
           }
         } catch (error) {
           console.error('Failed to load MediaPipe:', error)
-          document.getElementById('gesture-toggle').style.display = 'none';
-          document.getElementById('webcam-wrapper').style.display = 'none';
-          alert('手势识别功能加载失败，请使用按钮控制');
+          toggleGesture(false)
         }
       }
 
@@ -1213,8 +1026,12 @@
       }
 
       function processGestures(result) {
+        const cameraIndicator = document.getElementById('camera-indicator');
+        
         if (result.landmarks && result.landmarks.length > 0) {
           STATE.hand.detected = true
+          cameraIndicator.classList.add('active');
+          
           const lm = result.landmarks[0]
           STATE.hand.x = (lm[9].x - 0.5) * 2
           STATE.hand.y = (lm[9].y - 0.5) * 2
@@ -1224,10 +1041,10 @@
           const wrist = lm[0]
           const palm = lm[9]
 
-          // 捏夹距离
+          // Pinch distance
           const pinchDist = Math.hypot(thumb.x - index.x, thumb.y - index.y)
 
-          // 握拳检测
+          // Fist detection
           const fingerTips = [lm[8], lm[12], lm[16], lm[20]]
           let fistDistance = 0
           fingerTips.forEach((tip) => {
@@ -1235,7 +1052,7 @@
           })
           fistDistance /= 4
 
-          // 张开手势
+          // Open hand detection
           const tips = [lm[8], lm[12], lm[16], lm[20]]
           let avgDist = 0
           tips.forEach(
@@ -1243,110 +1060,97 @@
           )
           avgDist /= 4
 
-          // 手势逻辑
+          // Gesture logic
           if (fistDistance < 0.18) {
-            // 握拳
-            STATE.mode = 'TREE'
-            STATE.focusTarget = null
+            // Fist
+            changeMode('TREE')
           } else if (pinchDist < 0.045 && avgDist > 0.28) {
-            // 捏夹
+            // Pinch
             if (STATE.mode !== 'FOCUS') {
-              STATE.mode = 'FOCUS'
+              changeMode('FOCUS')
               const photos = particleSystem.filter((p) => p.type === 'PHOTO')
               if (photos.length)
                 STATE.focusTarget =
                   photos[Math.floor(Math.random() * photos.length)].mesh
             }
           } else if (avgDist > 0.4) {
-            // 张开手势
-            STATE.mode = 'SCATTER'
-            STATE.focusTarget = null
+            // Open hand
+            changeMode('SCATTER')
           }
         } else {
           STATE.hand.detected = false
+          cameraIndicator.classList.remove('active');
         }
       }
 
-      // Mobile gesture handling
-      function setupMobileGestures() {
-        const container = renderer.domElement;
+      function changeMode(mode) {
+        if (STATE.mode === mode) return;
         
-        container.addEventListener('touchstart', (e) => {
-          e.preventDefault();
-          touchPoints = Array.from(e.touches).map(t => ({
-            x: t.clientX,
-            y: t.clientY,
-            id: t.identifier
-          }));
-          
-          if (touchPoints.length === 1) {
-            STATE.touchStart = { x: touchPoints[0].x, y: touchPoints[0].y };
-            STATE.isDragging = true;
-            
-            // Double tap detection
-            const now = Date.now();
-            if (now - lastTouchTime < 300) {
-              toggleUI();
-            }
-            lastTouchTime = now;
-          } else if (touchPoints.length === 2) {
-            // Pinch gesture
-            isGestureActive = true;
-            const dx = touchPoints[0].x - touchPoints[1].x;
-            const dy = touchPoints[0].y - touchPoints[1].y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            if (distance < 50) {
-              // Pinch close: focus mode
-              STATE.mode = 'FOCUS';
-              const photos = particleSystem.filter((p) => p.type === 'PHOTO');
-              if (photos.length) {
-                STATE.focusTarget = photos[Math.floor(Math.random() * photos.length)].mesh;
-              }
-            }
+        STATE.mode = mode;
+        if (mode === 'FOCUS') {
+          const photos = particleSystem.filter((p) => p.type === 'PHOTO')
+          if (photos.length && !STATE.focusTarget) {
+            STATE.focusTarget = photos[Math.floor(Math.random() * photos.length)].mesh
           }
-        }, { passive: false });
+        } else {
+          STATE.focusTarget = null;
+        }
         
-        container.addEventListener('touchmove', (e) => {
-          e.preventDefault();
-          
-          if (!STATE.isDragging) return;
-          
-          const touch = e.touches[0];
-          const deltaX = touch.clientX - STATE.touchStart.x;
-          const deltaY = touch.clientY - STATE.touchStart.y;
-          
-          if (!STATE.autoRotate && (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5)) {
-            STATE.rotation.y += deltaX * 0.01;
-            STATE.rotation.x += deltaY * 0.005;
-            STATE.touchStart = { x: touch.clientX, y: touch.clientY };
-          }
-        }, { passive: false });
+        // Update mode indicator
+        const modeText = {
+          'TREE': 'Tree Mode',
+          'SCATTER': 'Scatter Mode', 
+          'FOCUS': 'Focus Mode'
+        }[mode];
         
-        container.addEventListener('touchend', (e) => {
-          e.preventDefault();
-          STATE.isDragging = false;
-          isGestureActive = false;
-          
-          if (e.touches.length === 0) {
-            touchPoints = [];
-            
-            // Swipe detection
-            if (!STATE.isDragging && STATE.touchStart) {
-              const touch = e.changedTouches[0];
-              const deltaX = touch.clientX - STATE.touchStart.x;
-              const deltaY = touch.clientY - STATE.touchStart.y;
-              
-              if (Math.abs(deltaX) > 50 && Math.abs(deltaY) < 30) {
-                if (deltaX > 0) {
-                  STATE.mode = 'TREE';
-                } else {
-                  STATE.mode = 'SCATTER';
-                }
-              }
+        document.getElementById('mode-indicator').textContent = modeText;
+      }
+
+      function toggleGesture(enabled) {
+        STATE.gestureEnabled = enabled;
+        const toggleBtn = document.getElementById('gesture-toggle');
+        const cameraIndicator = document.getElementById('camera-indicator');
+        
+        if (enabled) {
+          toggleBtn.classList.add('active');
+          toggleBtn.title = "Gesture Control On";
+          cameraIndicator.style.display = 'flex';
+          document.getElementById('webcam-wrapper').style.display = 'block';
+        } else {
+          toggleBtn.classList.remove('active');
+          toggleBtn.title = "Gesture Control Off";
+          cameraIndicator.style.display = 'none';
+          document.getElementById('webcam-wrapper').style.display = 'none';
+        }
+      }
+
+      function toggleUI() {
+        STATE.uiVisible = !STATE.uiVisible;
+        const elementsToHide = [
+          'h1',
+          '#control-bar',
+          '#gesture-toggle',
+          '#upload-btn',
+          '#camera-indicator',
+          '#gesture-hint',
+          '#mode-indicator'
+        ];
+        
+        elementsToHide.forEach(selector => {
+          const element = document.querySelector(selector);
+          if (element) {
+            if (STATE.uiVisible) {
+              element.classList.remove('ui-hidden');
+            } else {
+              element.classList.add('ui-hidden');
             }
           }
-        }, { passive: false });
+        });
+        
+        // Update hide button icon
+        const hideBtn = document.getElementById('hide-ui-btn');
+        hideBtn.innerHTML = STATE.uiVisible ? '👁️' : '👁️‍🗨️';
+        hideBtn.title = STATE.uiVisible ? "Hide UI" : "Show UI";
       }
 
       function setupEvents() {
@@ -1359,95 +1163,36 @@
         
         document.getElementById('file-input').addEventListener('change', handleImageUpload)
         
-        // Mobile control buttons
+        // Control buttons
         document.getElementById('btn-tree').addEventListener('click', () => {
-          STATE.mode = 'TREE';
-          STATE.focusTarget = null;
-          STATE.autoRotate = false;
+          changeMode('TREE');
         });
         
         document.getElementById('btn-scatter').addEventListener('click', () => {
-          STATE.mode = 'SCATTER';
-          STATE.focusTarget = null;
-          STATE.autoRotate = false;
+          changeMode('SCATTER');
         });
         
         document.getElementById('btn-focus').addEventListener('click', () => {
-          STATE.mode = 'FOCUS';
-          const photos = particleSystem.filter((p) => p.type === 'PHOTO');
-          if (photos.length) {
-            STATE.focusTarget = photos[Math.floor(Math.random() * photos.length)].mesh;
-          }
-          STATE.autoRotate = false;
-        });
-        
-        document.getElementById('btn-rotate').addEventListener('click', () => {
-          STATE.autoRotate = !STATE.autoRotate;
+          changeMode('FOCUS');
         });
         
         // Gesture toggle button
         document.getElementById('gesture-toggle').addEventListener('click', () => {
-          STATE.gestureEnabled = !STATE.gestureEnabled;
-          const toggleBtn = document.getElementById('gesture-toggle');
-          const webcamWrapper = document.getElementById('webcam-wrapper');
-          
-          if (STATE.gestureEnabled) {
-            toggleBtn.classList.add('active');
-            toggleBtn.title = "手势识别已开启";
-            webcamWrapper.style.display = 'flex';
-          } else {
-            toggleBtn.classList.remove('active');
-            toggleBtn.title = "手势识别已关闭";
-            webcamWrapper.style.display = 'none';
-          }
+          toggleGesture(!STATE.gestureEnabled);
         });
         
-        // Close help panel
-        document.querySelector('.close-help').addEventListener('click', () => {
-          document.getElementById('mobile-help').style.display = 'none';
-        });
+        // Hide UI button
+        document.getElementById('hide-ui-btn').addEventListener('click', toggleUI);
         
-        // Show help panel on title tap
-        document.querySelector('h1').addEventListener('click', () => {
-          document.getElementById('mobile-help').style.display = 'block';
-        });
-        
-        // Setup mobile gestures if on touch device
-        if (IS_TOUCH) {
-          setupMobileGestures();
-        } else {
-          // Desktop keyboard controls
+        // Keyboard shortcuts (for desktop)
+        if (!IS_MOBILE) {
           window.addEventListener('keydown', (e) => {
             if (e.key.toLowerCase() === 'h') toggleUI();
-            if (e.key === '1') STATE.mode = 'TREE';
-            if (e.key === '2') STATE.mode = 'SCATTER';
-            if (e.key === '3') STATE.mode = 'FOCUS';
-            if (e.key === 'r') STATE.autoRotate = !STATE.autoRotate;
+            if (e.key === '1') changeMode('TREE');
+            if (e.key === '2') changeMode('SCATTER');
+            if (e.key === '3') changeMode('FOCUS');
+            if (e.key.toLowerCase() === 'g') toggleGesture(!STATE.gestureEnabled);
           });
-        }
-      }
-
-      function toggleUI() {
-        const uiLayer = document.getElementById('ui-layer');
-        const mobileControls = document.getElementById('mobile-controls');
-        const uploadWrapper = document.querySelector('.upload-wrapper');
-        const gestureToggle = document.getElementById('gesture-toggle');
-        const webcamWrapper = document.getElementById('webcam-wrapper');
-        
-        if (uiLayer.classList.contains('ui-hidden')) {
-          uiLayer.classList.remove('ui-hidden');
-          mobileControls.style.opacity = '1';
-          uploadWrapper.style.opacity = '1';
-          if (STATE.gestureEnabled) {
-            gestureToggle.style.opacity = '1';
-            webcamWrapper.style.opacity = '1';
-          }
-        } else {
-          uiLayer.classList.add('ui-hidden');
-          mobileControls.style.opacity = '0';
-          uploadWrapper.style.opacity = '0';
-          gestureToggle.style.opacity = '0';
-          webcamWrapper.style.opacity = '0';
         }
       }
 
@@ -1455,26 +1200,21 @@
         requestAnimationFrame(animate)
         const dt = Math.min(clock.getDelta(), 0.05)
 
-        // Auto rotation
-        if (STATE.autoRotate) {
-          STATE.rotation.y += 0.3 * dt;
+        // Rotation logic
+        if (STATE.gestureEnabled && STATE.hand.detected && STATE.mode === 'SCATTER') {
+          const targetRotY = STATE.hand.x * Math.PI * 0.8;
+          const targetRotX = STATE.hand.y * Math.PI * 0.2;
+          STATE.rotation.y += (targetRotY - STATE.rotation.y) * 1.5 * dt;
+          STATE.rotation.x += (targetRotX - STATE.rotation.x) * 1.5 * dt;
+        } else if (STATE.mode === 'TREE') {
+          STATE.rotation.y += 0.25 * dt;
+          STATE.rotation.x += (0 - STATE.rotation.x) * 1.5 * dt;
         } else {
-          // Manual rotation with hand tracking
-          if (STATE.gestureEnabled && STATE.hand.detected && STATE.mode === 'SCATTER') {
-            const targetRotY = STATE.hand.x * Math.PI * 0.9;
-            const targetRotX = STATE.hand.y * Math.PI * 0.25;
-            STATE.rotation.y += (targetRotY - STATE.rotation.y) * 2.0 * dt;
-            STATE.rotation.x += (targetRotX - STATE.rotation.x) * 2.0 * dt;
-          } else if (STATE.mode === 'TREE') {
-            STATE.rotation.y += 0.3 * dt;
-            STATE.rotation.x += (0 - STATE.rotation.x) * 2.0 * dt;
-          } else {
-            STATE.rotation.y += 0.1 * dt;
-          }
-          
-          mainGroup.rotation.y = STATE.rotation.y;
-          mainGroup.rotation.x = STATE.rotation.x;
+          STATE.rotation.y += 0.1 * dt;
         }
+        
+        mainGroup.rotation.y = STATE.rotation.y;
+        mainGroup.rotation.x = STATE.rotation.x;
 
         // Update particles
         particleSystem.forEach((p) =>
